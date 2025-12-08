@@ -4,7 +4,7 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Moyenne();
+        TableMult();
     }
 
     // Exercice 1 : Nombre pair
@@ -46,5 +46,21 @@ public class Main {
 
         // Afficher la moyenne
         System.out.println("La moyenne des " + nbNotes + " notes est : " + moyenne);
+    }
+
+    // Exercice 3 : Table de multiplication
+    public static void TableMult() {
+        Scanner scanner = new Scanner(System.in);
+
+        // Demander à l'utilisateur quelle table de multiplication afficher
+        System.out.println("Entrer la table à afficher :");
+
+        int table = scanner.nextInt();
+
+        // Afficher la table
+        System.out.println("Table de " + table + " :");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(table + " x " + i + " = " + table * i);
+        }
     }
 }
