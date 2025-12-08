@@ -4,15 +4,17 @@ import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Devinette();
+        TabCalc();
     }
 
     // Exercice 1 : Nombre pair
     public static void Pair() {
 
         // Demander à l'utilisateur un nombre
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Tapper un chiffre :");
 
         // Stocker le nombre dans une variable
@@ -24,8 +26,6 @@ public class Main {
 
     // Exercice 2 : Moyenne
     public static void Moyenne() {
-        Scanner scanner = new Scanner(System.in);
-
         // Demander à l'utilisateur le nombre de notes
         System.out.println("Entrer le nombre de notes :");
         int nbNotes = scanner.nextInt();
@@ -51,8 +51,6 @@ public class Main {
 
     // Exercice 3 : Table de multiplication
     public static void TableMult() {
-        Scanner scanner = new Scanner(System.in);
-
         // Demander à l'utilisateur quelle table de multiplication afficher
         System.out.println("Entrer la table à afficher :");
 
@@ -67,8 +65,6 @@ public class Main {
 
     // Exercice 4 : Jeu de devinette
     public static void Devinette() {
-        Scanner scanner = new Scanner(System.in);
-
         // Nombre secret à trouver
         Random rng = new Random();
         int nbSecret = rng.nextInt(1, 100);
@@ -92,5 +88,31 @@ public class Main {
 
         // Afficher un message de réussite
         System.out.println("Bravo, vous avez trouvé le bon nombre en " + userTries + " essais !");
+    }
+
+    // Exercice 5 : Tableau et calculs
+    public static void TabCalc() {
+        // Demander à l'utilisateur la taille du tableau
+        System.out.println("Entrez le total de nombres à saisir :");
+        int nbs = scanner.nextInt();
+
+        // Déclaration du tableau
+        int[] tableau = new int[nbs];
+
+        // Demander à l'utilisateur de remplir le tableau
+        for(int i = 0; i < nbs; i++) {
+            System.out.println("Entrez le nombre " + (i + 1) + " :");
+            tableau[i] = scanner.nextInt();
+        }
+
+        // Calcul de la somme et moyenne
+        double sommeNombres = 0;
+        for (int i : tableau) {
+            sommeNombres += i;
+        }
+        double moyenne = sommeNombres / nbs;
+
+        // Affichage des résultats
+        System.out.println("Somme : " + sommeNombres + " - Moyenne : " + moyenne);
     }
 }
