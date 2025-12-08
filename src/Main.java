@@ -1,10 +1,11 @@
+import java.util.Random;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        TableMult();
+        Devinette();
     }
 
     // Exercice 1 : Nombre pair
@@ -62,5 +63,34 @@ public class Main {
         for (int i = 1; i <= 10; i++) {
             System.out.println(table + " x " + i + " = " + table * i);
         }
+    }
+
+    // Exercice 4 : Jeu de devinette
+    public static void Devinette() {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nombre secret à trouver
+        Random rng = new Random();
+        int nbSecret = rng.nextInt(1, 100);
+
+        // Demander à l'utilisateur de saisir un nombre, jusqu'a ce qu'il trouve le bon
+        int userInput = 0;
+        int userTries = 0;
+        while (userInput != nbSecret) {
+            // Demander à l'utilisateur de saisir un nombre
+            System.out.println("Entrer un nombre entre 1 et 100 :");
+            userInput = scanner.nextInt();
+
+            // Si le nombre n'est pas bon, guide l'utilisateur vers le bon nombre
+            if (userInput != nbSecret) {
+                System.out.println(userInput < nbSecret ? "Trop petit !" : "Trop grand !");
+            }
+
+            // Incrémente le nombre d'essais
+            userTries++;
+        }
+
+        // Afficher un message de réussite
+        System.out.println("Bravo, vous avez trouvé le bon nombre en " + userTries + " essais !");
     }
 }
