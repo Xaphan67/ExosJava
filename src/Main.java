@@ -116,6 +116,42 @@ public class Main {
                 System.out.println("Pas d'inscrit");
             }
         }
+
+        // POO Exercice 4
+        System.out.println("\nSaisissez le prénom d'un formateur :");
+        String userPrenom = scanner.nextLine();
+
+        Enseignant enseignantRecherche = null;
+        for (Enseignant enseignant : enseignants) {
+            if (Objects.equals(enseignant.getPrenom(), userPrenom)) {
+                enseignantRecherche = enseignant;
+                break;
+            }
+        }
+
+        if (enseignantRecherche != null) {
+            if (enseignantRecherche.getFilieres() != null) {
+                for (Filiere filiere : enseignantRecherche.getFilieres()) {
+                    ArrayList<Etudiant> etudiantsFiliere = new ArrayList<>();
+                    for (Etudiant etudiant : etudiants) {
+                        if (etudiant.getFiliere() == filiere) {
+                            etudiantsFiliere.add(etudiant);
+                        }
+                    }
+
+                    System.out.println("\n" + enseignantRecherche.getPrenom() + " anime la formation " + filiere.getLibelle() + " avec " + etudiantsFiliere.toArray().length + " étudiants :");
+                    for (Etudiant e : etudiantsFiliere) {
+                        System.out.println(e.getNom() + " " + e.getPrenom());
+                    }
+                }
+            }
+            else {
+                System.out.println("Ce formateur n'a aucune filière qui lui est affectée !");
+            }
+        }
+        else {
+            System.out.println("Formateur non trouvé !");
+        }
     }
 
     // Exercice 1 : Nombre pair
