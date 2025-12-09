@@ -1,7 +1,4 @@
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import Packages.Enseignant;
 import Packages.Etudiant;
@@ -18,14 +15,15 @@ public class Main {
         /*Personne cedric = new Personne("Falda", "Cédric", 38);
         System.out.println("Bonjour, je m'appelle " + cedric.getNom() + " " + cedric.getPrenom() + ", j'ai " + cedric.getAge() + " ans");*/
 
+        // POO Exercice 1
         Specialite java = new Specialite("JAVA/JEE");
         Specialite html = new Specialite("HTML/CSS");
         Specialite gestionProjet = new Specialite("Gestion de projet");
         Specialite js = new Specialite("JS");
         Specialite php = new Specialite("PHP");
 
-        Enseignant enseignant1 = new Enseignant("Nom1", "Prenom1", java);
-        Enseignant enseignant2 = new Enseignant("Nom2", "Prenom2", java);
+        Enseignant enseignant1 = new Enseignant("Montgomery Burns", "Charles", java);
+        Enseignant enseignant2 = new Enseignant("Kas", "Zack", java);
         Enseignant enseignant3 = new Enseignant("Nom3", "Prenom3", php);
         Enseignant enseignant4 = new Enseignant("Nom4", "Prenom4", js);
 
@@ -47,6 +45,7 @@ public class Main {
             }
         }
 
+        // POO Exercice 2
         Filiere cda = new Filiere("CDA", "");
         Filiere marketing = new Filiere("Marketing", "");
         Filiere assistance = new Filiere("Assistance de vie", "");
@@ -65,6 +64,47 @@ public class Main {
             System.out.println("Filière : " + filiere.getLibelle());
             boolean vide = true;
             int index = 1;
+            for (Etudiant etudiant : etudiants) {
+                if (etudiant.getFiliere() == filiere) {
+                    System.out.println(index + "- " + etudiant.getNom() + " " + etudiant.getPrenom());
+                    vide = false;
+                    index++;
+                }
+            }
+            if (vide) {
+                System.out.println("Pas d'inscrit");
+            }
+        }
+
+        // POO Exercice 3
+        enseignant1.setFilieres(cda, marketing);
+        enseignant2.setFilieres(marketing);
+
+        System.out.println("\nListe des étudiants et formateurs par filière :");
+        boolean vide;
+        int index = 1;
+        for (Filiere filiere : filieres) {
+            System.out.println("\n" + filiere.getLibelle());
+            System.out.println("Formateur(s) : ");
+            vide = true;
+            index = 1;
+            for (Enseignant enseignant : enseignants) {
+                if (enseignant.getFilieres() != null) {
+                    for (Filiere filiereEnseignant : enseignant.getFilieres()) {
+                        if (filiereEnseignant == filiere) {
+                            System.out.println(index + "- " + enseignant.getNom() + " " + enseignant.getPrenom());
+                            vide = false;
+                            index++;
+                        }
+                    }
+                }
+            }
+            if (vide) {
+                System.out.println("Aucun");
+            }
+            System.out.println("Étudiant(s) : ");
+            vide = true;
+            index = 1;
             for (Etudiant etudiant : etudiants) {
                 if (etudiant.getFiliere() == filiere) {
                     System.out.println(index + "- " + etudiant.getNom() + " " + etudiant.getPrenom());

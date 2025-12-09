@@ -5,6 +5,7 @@ public class Enseignant {
     private String nom;
     private String prenom;
     private Specialite specialite;
+    private Filiere[] filieres;
 
     public Enseignant (String nom, String prenom, Specialite specialite) {
         this.nom = nom;
@@ -24,6 +25,10 @@ public class Enseignant {
         return specialite;
     }
 
+    public Filiere[] getFilieres() {
+        return filieres;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -34,5 +39,9 @@ public class Enseignant {
 
     public void setSpecialite(Specialite specialite) {
         this.specialite = specialite;
+    }
+
+    public void setFilieres(Filiere... filieres) {
+        this.filieres = filieres;
     }
 }
