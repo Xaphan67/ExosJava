@@ -8,7 +8,7 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        TabCalc();
+        Voyelles();
     }
 
     // Exercice 1 : Nombre pair
@@ -114,5 +114,29 @@ public class Main {
 
         // Affichage des résultats
         System.out.println("Somme : " + sommeNombres + " - Moyenne : " + moyenne);
+    }
+    
+    // Exercice 6 : Comptage de voyelles
+
+    public static void Voyelles() {
+        // Demander à l'utilisateur une phrase
+        System.out.println("Entrez une phrase :");
+        char[] phrase = scanner.nextLine().toLowerCase().toCharArray();
+
+        // Déclaration du tableau des voyelles
+        char[] voyelles = {'a', 'e', 'i', 'o', 'u', 'y'};
+
+        // Comptage des voyelles
+        int totalVoyelles = 0;
+        for(char i : phrase) {
+            for(char j : voyelles) {
+                if (i == j) {
+                    totalVoyelles++;
+                }
+            }
+        }
+
+        // Affichage des résultats
+        System.out.println("La phrase contient " + totalVoyelles + " voyelles.");
     }
 }
