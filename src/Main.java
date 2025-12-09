@@ -4,6 +4,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Packages.Enseignant;
+import Packages.Etudiant;
+import Packages.Filiere;
 import Packages.Specialite;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -42,6 +44,36 @@ public class Main {
             }
             if (vide) {
                 System.out.println("Aucun enseignant pour la spécialité " + specialite.getLibelle());
+            }
+        }
+
+        Filiere cda = new Filiere("CDA", "");
+        Filiere marketing = new Filiere("Marketing", "");
+        Filiere assistance = new Filiere("Assistance de vie", "");
+
+        Etudiant homer = new Etudiant("Simpson", "Homer", cda);
+        Etudiant bart = new Etudiant("Simpson", "bart", cda);
+        Etudiant vanessa = new Etudiant("Sultan", "Vanessa", marketing);
+        Etudiant marge = new Etudiant("Simpson", "Marge", marketing);
+        Etudiant lisa = new Etudiant("Simpson", "Lisa", marketing);
+
+        Filiere[] filieres = {cda, marketing, assistance};
+        Etudiant[] etudiants = {homer, bart, vanessa, marge, lisa};
+
+        System.out.println("\nListe des étudiants par filière :");
+        for (Filiere filiere : filieres) {
+            System.out.println("Filière : " + filiere.getLibelle());
+            boolean vide = true;
+            int index = 1;
+            for (Etudiant etudiant : etudiants) {
+                if (etudiant.getFiliere() == filiere) {
+                    System.out.println(index + "- " + etudiant.getNom() + " " + etudiant.getPrenom());
+                    vide = false;
+                    index++;
+                }
+            }
+            if (vide) {
+                System.out.println("Pas d'inscrit");
             }
         }
     }
