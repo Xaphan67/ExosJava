@@ -1,5 +1,10 @@
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.Random;
 import java.util.Scanner;
+
+import Packages.Enseignant;
+import Packages.Specialite;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -8,8 +13,37 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Personne cedric = new Personne("Falda", "Cédric", 38);
-        System.out.println("Bonjour, je m'appelle " + cedric.getNom() + " " + cedric.getPrenom() + ", j'ai " + cedric.getAge() + " ans");
+        /*Personne cedric = new Personne("Falda", "Cédric", 38);
+        System.out.println("Bonjour, je m'appelle " + cedric.getNom() + " " + cedric.getPrenom() + ", j'ai " + cedric.getAge() + " ans");*/
+
+        Specialite java = new Specialite("JAVA/JEE");
+        Specialite html = new Specialite("HTML/CSS");
+        Specialite gestionProjet = new Specialite("Gestion de projet");
+        Specialite js = new Specialite("JS");
+        Specialite php = new Specialite("PHP");
+
+        Enseignant enseignant1 = new Enseignant("Nom1", "Prenom1", java);
+        Enseignant enseignant2 = new Enseignant("Nom2", "Prenom2", java);
+        Enseignant enseignant3 = new Enseignant("Nom3", "Prenom3", php);
+        Enseignant enseignant4 = new Enseignant("Nom4", "Prenom4", js);
+
+        Specialite[] specialites = {java, html, gestionProjet, js, php};
+        Enseignant[] enseignants = {enseignant1, enseignant2, enseignant3, enseignant4};
+
+        System.out.println("Enseignants par spécialité :");
+        for (Specialite specialite : specialites) {
+            System.out.println(specialite.getLibelle() + " :");
+            boolean vide = true;
+            for (Enseignant enseignant : enseignants) {
+                if (enseignant.getSpecialite() == specialite) {
+                    System.out.println(enseignant.getNom() + " " + enseignant.getPrenom());
+                    vide = false;
+                }
+            }
+            if (vide) {
+                System.out.println("Aucun enseignant pour la spécialité " + specialite.getLibelle());
+            }
+        }
     }
 
     // Exercice 1 : Nombre pair
