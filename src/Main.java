@@ -8,7 +8,8 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Voyelles();
+        Personne cedric = new Personne("Falda", "Cédric", 38);
+        System.out.println("Bonjour, je m'appelle " + cedric.getNom() + " " + cedric.getPrenom() + ", j'ai " + cedric.getAge() + " ans");
     }
 
     // Exercice 1 : Nombre pair
@@ -117,7 +118,6 @@ public class Main {
     }
     
     // Exercice 6 : Comptage de voyelles
-
     public static void Voyelles() {
         // Demander à l'utilisateur une phrase
         System.out.println("Entrez une phrase :");
