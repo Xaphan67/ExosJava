@@ -204,8 +204,6 @@ public class Main {
                     }
                 }
             }
-            // Convertit ArayList en tableau
-            Enseignant[] enseignantsArray = enseignantsFiliere.toArray(new Enseignant[0]);
 
             // Récupère les étudiants correspondants à la filière
             ArrayList<Etudiant> etudiantsFiliere = new ArrayList<>();
@@ -216,10 +214,10 @@ public class Main {
             }
 
             // Affiche les informations
-            if (enseignantsArray.length > 0) {
+            if (!enseignantsFiliere.isEmpty()) {
                 StringBuilder strEnseignants = new StringBuilder();
-                for (int i = 0; i < enseignantsArray.length; i ++) {
-                    strEnseignants.append(i > 0 ? (i < (enseignantsArray.length - 1) ? ", " : " et ") : "").append(enseignantsArray[i].getNom()).append(" ").append(enseignantsArray[i].getPrenom());
+                for (int i = 0; i < enseignantsFiliere.size(); i ++) {
+                    strEnseignants.append(i > 0 ? (i < (enseignantsFiliere.size() - 1) ? ", " : " et ") : "").append(enseignantsFiliere.get(i).getNom()).append(" ").append(enseignantsFiliere.get(i).getPrenom());
                 }
                 System.out.println("\n" + filiereRecherche.getLibelle() + " est animée par " + strEnseignants + " avec " + etudiantsFiliere.toArray().length + " étudiants :");
                 for (Etudiant e : etudiantsFiliere) {
