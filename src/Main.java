@@ -118,20 +118,43 @@ public class Main {
         }
 
         // POO Exercice 4
-        System.out.println("\nSaisissez le prénom d'un formateur :");
-        String userPrenom = scanner.nextLine();
+        System.out.println("\nQue recherchez-vous ? (1 - Formateur / 2- Filière) :");
+        String userTypeRecherche = scanner.nextLine();
 
+        // Exécute la bonne méthode en fonction de la saisie utilisateur
+        if (userTypeRecherche.toLowerCase().contains("formateur") || userTypeRecherche.equalsIgnoreCase("1")) {
+            System.out.println("\nSaisissez le prénom d'un formateur :");
+            InfosFormateur(scanner.nextLine(), enseignants, etudiants);
+        }
+        else if (userTypeRecherche.toLowerCase().contains("filière") || userTypeRecherche.equalsIgnoreCase("2")) {
+            System.out.println("\nSaisissez le libéllé d'une filière :");
+            InfosFiliere(scanner.nextLine(), enseignants, filieres, etudiants);
+        }
+        else {
+            System.out.println("Saisie incorrecte");
+        }
+    }
+
+    // Affiche les informations du formateur entré par l'utilisateur
+    public static void InfosFormateur(String saisieUtilisateur, Enseignant[] enseignants, Etudiant[] etudiants) {
+
+        // Recherche le formateur correspondant à la saisie de l'utilisateur
         Enseignant enseignantRecherche = null;
         for (Enseignant enseignant : enseignants) {
-            if (Objects.equals(enseignant.getPrenom(), userPrenom)) {
+            if (enseignant.getPrenom().toLowerCase().contains(saisieUtilisateur.toLowerCase())) {
                 enseignantRecherche = enseignant;
                 break;
             }
         }
 
+        // Récupère et affiche les informations correspondantes
         if (enseignantRecherche != null) {
             if (enseignantRecherche.getFilieres() != null) {
+
+                // Pour chaque filière correspondant à l'enseignant…
                 for (Filiere filiere : enseignantRecherche.getFilieres()) {
+
+                    // Récupère les étudiants correspondants à la filière
                     ArrayList<Etudiant> etudiantsFiliere = new ArrayList<>();
                     for (Etudiant etudiant : etudiants) {
                         if (etudiant.getFiliere() == filiere) {
@@ -139,6 +162,7 @@ public class Main {
                         }
                     }
 
+                    // Affiche les informations
                     System.out.println("\n" + enseignantRecherche.getPrenom() + " anime la formation " + filiere.getLibelle() + " avec " + etudiantsFiliere.toArray().length + " étudiants :");
                     for (Etudiant e : etudiantsFiliere) {
                         System.out.println(e.getNom() + " " + e.getPrenom());
@@ -151,6 +175,63 @@ public class Main {
         }
         else {
             System.out.println("Formateur non trouvé !");
+        }
+    }
+
+    // Affiche les informations d'une filière entrée par l'utilisateur
+    public static void InfosFiliere(String saisieUtilisateur, Enseignant[] enseignants, Filiere[] filieres, Etudiant[] etudiants) {
+
+        // Recherche la filière correspondante à la saisie de l'utilisateur
+        Filiere filiereRecherche = null;
+        for (Filiere filiere : filieres) {
+            if (filiere.getLibelle().toLowerCase().contains(saisieUtilisateur.toLowerCase())) {
+                filiereRecherche = filiere;
+                break;
+            }
+        }
+
+        // Récupère et affiche les informations correspondantes
+        if (filiereRecherche != null) {
+
+            // Récupère les enseignants correspondants à la filière
+            ArrayList<Enseignant> enseignantsFiliere = new ArrayList<>();
+            for (Enseignant enseignant : enseignants) {
+                if (enseignant.getFilieres() != null) {
+                    for (Filiere filiere : enseignant.getFilieres()) {
+                        if (filiere == filiereRecherche) {
+                            enseignantsFiliere.add(enseignant);
+                        }
+                    }
+                }
+            }
+            // Convertit ArayList en tableau
+            Enseignant[] enseignantsArray = enseignantsFiliere.toArray(new Enseignant[0]);
+
+            // Récupère les étudiants correspondants à la filière
+            ArrayList<Etudiant> etudiantsFiliere = new ArrayList<>();
+            for (Etudiant etudiant : etudiants) {
+                if (etudiant.getFiliere() == filiereRecherche) {
+                    etudiantsFiliere.add(etudiant);
+                }
+            }
+
+            // Affiche les informations
+            if (enseignantsArray.length > 0) {
+                StringBuilder strEnseignants = new StringBuilder();
+                for (int i = 0; i < enseignantsArray.length; i ++) {
+                    strEnseignants.append(i > 0 ? (i < (enseignantsArray.length - 1) ? ", " : " et ") : "").append(enseignantsArray[i].getNom()).append(" ").append(enseignantsArray[i].getPrenom());
+                }
+                System.out.println("\n" + filiereRecherche.getLibelle() + " est animée par " + strEnseignants + " avec " + etudiantsFiliere.toArray().length + " étudiants :");
+                for (Etudiant e : etudiantsFiliere) {
+                    System.out.println(e.getNom() + " " + e.getPrenom());
+                }
+            }
+            else {
+                System.out.println("Aucun formateur n'anime cette filière !");
+            }
+        }
+        else {
+            System.out.println("Filière non trouvée !");
         }
     }
 
